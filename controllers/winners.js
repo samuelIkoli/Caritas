@@ -1,22 +1,45 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-// const passportLocalMongoose = require('passport-local-mongoose');
+const session = require('express-session');
+const bcrypt = require('bcryptjs');
+const express = require('express')
+const User = require('../models/users')
+const Winner = require('../models/winners')
+const { hashPassword } = require('../utils/hashPassword')
+const { Mail } = require('../utils/validate')
 
-const WinnerSchema = new Schema({
-    user_id: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    category: {
-        type: String,
-        required: true,
-    },
-    date: {
-        type: Date,
-        required: true,
+module.exports.getWinners = async (req, res) => {
+    try {
+        const winners = await Winner.find();
+        res.status(200).send(winners)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
     }
+}
 
-});
-// UserSchema.plugin(passportLocalMongoose);
-module.exports = mongoose.model('Winner', WinnerSchema);
+
+module.exports.createWinner = async (req, res) => {
+    try {
+        //get params from the request body
+        const user_id = req.body.user_id || req.session.user_id
+        const today = new Date(Date.now())
+        const user = await User.findById(user_id);
+        if (!user) {
+            return res.status(400).send('no user found')
+        } else {
+            const { email, name, username, phone, profile_pic, bankName, accountName, accountNumber, dob } = user
+            const winner = new Winner({ user_id, email, name, username, phone, profile_pic, bankName, accountName, accountNumber, dob, isPaid: false, date: today });
+            await winner.save(); console.log(winner);
+            console.log(req.session);
+            return res.send(winner);
+        }
+    } catch (e) {
+        return res.status(400).json({ message: e.message });
+    }
+}
+
+
+
+
+
+
+
+

@@ -7,6 +7,7 @@ const app = express();
 const session = require('express-session');
 const { readdirSync } = require("fs");
 const mongoose = require('mongoose');
+const CronJob = require('cron').CronJob;
 
 // const LocalStrategy = require('passport-local');
 const dotenv = require('dotenv')
@@ -43,6 +44,17 @@ const sessionConfig = {
     }
 }
 
+
+const job = new CronJob(
+    '* * * * * *',
+    function () {
+        const number = Math.floor(Math.random() * 9999)
+        console.log('Number is', number);
+    },
+    null,
+    true,
+    'America/Los_Angeles'
+);
 
 app.use(session(sessionConfig))
 
