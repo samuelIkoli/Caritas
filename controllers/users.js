@@ -45,7 +45,7 @@ module.exports.register = async (req, res) => {
             await user.save();
             const num = Math.floor(1000 + Math.random() * 9000)
             const user_id = user._id
-            const link = `www.google.com`
+            const link = `https://caritas-rho.vercel.app/verify/${user_id}`
             Mail(email, num, link)
             console.log(user);
             console.log(link);

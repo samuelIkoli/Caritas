@@ -35,6 +35,7 @@ router.route('/session')
 
 router.post('/validate/email', users.emailverify)
 router.post('/verify/:id', users.verify)
+router.get('/verify/:id', users.verify)
 router.post('/check', users.check)
 // router.post('/validate/sms', users.sendsms)
 
