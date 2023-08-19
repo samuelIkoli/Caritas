@@ -12,7 +12,6 @@ router.route('/user/purchase')
     .post(purchases.getPurchase)
     .put(purchases.createPurchase)
 
-
 router.route('/user/allpurchases')
     .post(purchases.getUserPurchases)
 
@@ -22,6 +21,10 @@ router.route('/pay')
 
 router.route('/payment/verify')
     .post(purchases.paymentVerification)
+
+router.route('/donate')
+    .post(purchases.createDonation)
+
 
 
 module.exports = router;

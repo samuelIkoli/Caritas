@@ -92,9 +92,17 @@ module.exports.getProfile = async (req, res) => {
 }
 
 module.exports.check = async (req, res) => {
-    const number = Number.find({}).sort({ date: 'desc' }).exec();
-    console.log(number)
-    res.send(number)
+    const numbers = await Number.find({}).sort({ date: 'desc' }).exec();
+    const num = numbers[0]
+    return res.json(num)
+}
+
+module.exports.attempt = async (req, res) => {
+    const attempt = parseInt(req.body.attempt)
+    const numbers = await Number.find({}).sort({ date: 'desc' }).exec();
+    const num = numbers[0]
+    const answer = num.number
+    return res.send(attempt === answer)
 }
 
 module.exports.editProfile = async (req, res) => {

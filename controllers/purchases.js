@@ -1,5 +1,6 @@
 const session = require('express-session');
 const { Purchase } = require('../models/purchases')
+const { Donation } = require('../models/donation')
 const { User } = require('../models/users')
 // const { Op } = require('sequelize')
 // const uniqid = require('uniqid')
@@ -47,6 +48,15 @@ module.exports.createPurchase = async (req, res) => {
         const newPurchase = await Purchase.create({ user_id, username, email, name, amount, tokens, reference })
         const updateUser = await User.update({ tokens })
         res.send(newPurchase)
+    } catch (error) {
+        return res.status(400).json({ message: error.message })
+    }
+}
+module.exports.createDonation = async (req, res) => {
+    const { user_id, email, name, amount, reference, anonymous } = req.body
+    try {
+        const newDonation = await Donation.create({ user_id, email, name, amount, tokens, reference, phone, anonymous })
+        res.send(newDonation)
     } catch (error) {
         return res.status(400).json({ message: error.message })
     }

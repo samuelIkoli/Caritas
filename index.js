@@ -47,7 +47,7 @@ const sessionConfig = {
 
 
 const job = new CronJob(
-    '20 10 12 * * *',
+    '* * 1 * * *',
     async function () {
         const number = Math.floor(Math.random() * 9999);
         console.log('Number is', number);
@@ -57,8 +57,19 @@ const job = new CronJob(
     },
     null,
     true,
-    'America/Los_Angeles'
+    'Africa/Lagos'
 );
+
+// const job2 = new CronJob(
+//     '* * 1/12 * * *',
+//     async function () {
+//         date = new Date(Date.now());
+//         console.log(date)
+//     },
+//     null,
+//     true,
+//     'Africa/Lagos'
+// );
 
 app.use(session(sessionConfig))
 
