@@ -41,12 +41,10 @@ const WinnerSchema = new Schema({
     },
     isPaid: {
         type: Boolean,
-    },
-    date: {
-        type: Date,
-        required: true,
     }
 
-});
+},
+    { timestamps: true }
+);
 // UserSchema.plugin(passportLocalMongoose);
 module.exports = mongoose.model('Winner', WinnerSchema);

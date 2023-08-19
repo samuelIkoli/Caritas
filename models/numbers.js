@@ -7,11 +7,9 @@ const NumberSchema = new Schema({
     number: {
         type: Number,
     },
-    date: {
-        type: Date,
-        required: true,
-    }
 
-});
+},
+    { timestamps: true }
+);
 // UserSchema.plugin(passportLocalMongoose);
 module.exports = mongoose.model('Number', NumberSchema);

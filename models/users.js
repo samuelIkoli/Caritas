@@ -46,13 +46,12 @@ const UserSchema = new Schema({
     isActive: {
         type: Boolean,
     },
-    date: {
-        type: Date,
-    },
     dob: {
         type: Date,
     }
 
-});
+},
+    { timestamps: true }
+);
 // UserSchema.plugin(passportLocalMongoose);
 module.exports = mongoose.model('User', UserSchema);

@@ -42,10 +42,9 @@ module.exports.createPurchase = async (req, res) => {
     const name = req.body.name || req.session.user.name
     const profile_pic = req.body.profile_pic || req.session.user.profile_pic
     const reference = req.body.reference || req.session.reference
-    const today = new Date(Date.now())
     console.log("user_id is", user_id)
     try {
-        const newPurchase = await Purchase.create({ user_id, username, email, name, amount, tokens, reference, date: today })
+        const newPurchase = await Purchase.create({ user_id, username, email, name, amount, tokens, reference })
         const updateUser = await User.update({ tokens })
         res.send(newPurchase)
     } catch (error) {

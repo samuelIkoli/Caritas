@@ -20,13 +20,12 @@ module.exports.createWinner = async (req, res) => {
     try {
         //get params from the request body
         const user_id = req.body.user_id || req.session.user_id
-        const today = new Date(Date.now())
         const user = await User.findById(user_id);
         if (!user) {
             return res.status(400).send('no user found')
         } else {
             const { email, name, username, phone, profile_pic, bankName, accountName, accountNumber, dob } = user
-            const winner = new Winner({ user_id, email, name, username, phone, profile_pic, bankName, accountName, accountNumber, dob, isPaid: false, date: today });
+            const winner = new Winner({ user_id, email, name, username, phone, profile_pic, bankName, accountName, accountNumber, dob, isPaid: false });
             await winner.save();
             console.log(winner);
             console.log(req.session);

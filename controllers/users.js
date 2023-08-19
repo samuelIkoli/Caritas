@@ -33,20 +33,18 @@ module.exports.get = async (req, res) => {
 module.exports.register = async (req, res) => {
     try {
         //get params from the request body
-        const { email, name, username, password, phone, profile_pic, bankName, accountName, accountNumber, dob } = req.body
+        const { email, name, username, password } = req.body
         //hash password and save to database
         const hash = await hashPassword(password);
-        const today = new Date(Date.now())
         const check = await User.findOne({ email: email.toLowerCase() });
         if (check) {
             return res.status(400).send('user already exist')
         } else {
-            const user = new User({ email, name, username, password: hash, phone, profile_pic, tokens: 50, free_trials: 1, bankName, accountName, accountNumber, dob, isActive: false, date: today });
+            const user = new User({ email: email.toLowerCase(), name, username, password: hash, isActive: false });
             await user.save();
-            const num = Math.floor(1000 + Math.random() * 9000)
             const user_id = user._id
             const link = `https://caritas-rho.vercel.app/verify/${user_id}`
-            Mail(email, num, link)
+            Mail(email, link)
             console.log(user);
             console.log(link);
             return res.send(user);

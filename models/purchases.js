@@ -30,14 +30,13 @@ const PurchaseSchema = new Schema({
     tokens: {
         type: Number,
     },
-    date: {
-        type: Date,
-    },
     reference: {
         type: String,
         required: true,
     }
 
-});
+},
+    { timestamps: true }
+);
 // UserSchema.plugin(passportLocalMongoose);
 module.exports = mongoose.model('Purchase', PurchaseSchema);
