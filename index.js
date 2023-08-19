@@ -52,7 +52,7 @@ const job = new CronJob(
         const number = Math.floor(Math.random() * 9999);
         console.log('Number is', number);
         date = new Date(Date.now());
-        const newNum = new Number({ number, date });
+        const newNum = new Number({ number });
         await newNum.save();
     },
     null,
