@@ -27,7 +27,8 @@ module.exports.createWinner = async (req, res) => {
         } else {
             const { email, name, username, phone, profile_pic, bankName, accountName, accountNumber, dob } = user
             const winner = new Winner({ user_id, email, name, username, phone, profile_pic, bankName, accountName, accountNumber, dob, isPaid: false, date: today });
-            await winner.save(); console.log(winner);
+            await winner.save();
+            console.log(winner);
             console.log(req.session);
             return res.send(winner);
         }

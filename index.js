@@ -8,6 +8,7 @@ const session = require('express-session');
 const { readdirSync } = require("fs");
 const mongoose = require('mongoose');
 const CronJob = require('cron').CronJob;
+const Number = require('./models/numbers');
 
 // const LocalStrategy = require('passport-local');
 const dotenv = require('dotenv')
@@ -46,10 +47,13 @@ const sessionConfig = {
 
 
 const job = new CronJob(
-    '* * * * * *',
-    function () {
-        const number = Math.floor(Math.random() * 9999)
+    '20 10 12 * * *',
+    async function () {
+        const number = Math.floor(Math.random() * 9999);
         console.log('Number is', number);
+        date = new Date(Date.now());
+        const newNum = new Number({ number, date });
+        await newNum.save();
     },
     null,
     true,

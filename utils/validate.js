@@ -3,7 +3,7 @@ const nodeMailer = require("nodemailer");
 require('dotenv').config()
 const app = express()
 
-module.exports.Mail = async (email, pin) => {
+module.exports.Mail = async (email, pin, link) => {
 
   const transporter = nodeMailer.createTransport({
     service: "gmail",
@@ -47,7 +47,9 @@ module.exports.Mail = async (email, pin) => {
         <h1 class="center">Welcome to Caritas Nostra</h1>
         <div class="center">Enter the verification pin below in the website to verify your email</div>
         <div class="center">${pin}</div>
-        <div class="center"><button class="">Click here</button></div>
+        <div class="center">
+          <a href=${link}>Click here to complete registration</a>
+        </div>
     </div>
 </body>
 

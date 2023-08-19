@@ -2,9 +2,11 @@ const session = require('express-session');
 const bcrypt = require('bcryptjs');
 const express = require('express')
 const User = require('../models/users')
+const Number = require('../models/numbers')
 // const { Op, where } = require('sequelize')
 const { hashPassword } = require('../utils/hashPassword')
-const { Mail } = require('../utils/validate')
+const { Mail } = require('../utils/validate');
+const { trusted } = require('mongoose');
 // const uniqid = require('uniqid');
 // const { getHostEvent, getPurchaseFollow, has24HoursPassed } = require('../utils/getFriends');
 
@@ -41,8 +43,12 @@ module.exports.register = async (req, res) => {
         } else {
             const user = new User({ email, name, username, password: hash, phone, profile_pic, tokens: 50, free_trials: 1, bankName, accountName, accountNumber, dob, isActive: false, date: today });
             await user.save();
+            const num = Math.floor(1000 + Math.random() * 9000)
+            const user_id = user._id
+            const link = `www.google.com`
+            Mail(email, num, link)
             console.log(user);
-            console.log(req.session);
+            console.log(link);
             return res.send(user);
         }
     } catch (e) {
@@ -87,8 +93,14 @@ module.exports.getProfile = async (req, res) => {
     res.send(user)
 }
 
+module.exports.check = async (req, res) => {
+    const number = Number.find({}).sort({ date: 'desc' }).exec();
+    console.log(number)
+    res.send(number)
+}
+
 module.exports.editProfile = async (req, res) => {
-    const { email, name, username, phone, profile_pic, tokens, bankName, accountName, accountNumber, dob } = req.body
+    const { email, name, username, phone, profile_pic, bankName, accountName, accountNumber, dob } = req.body
     const id = req.session.user_id || req.body.id;
     try {
         const updateUser = await User.findByIdAndUpdate(id, { email, name, username, phone, profile_pic, bankName, accountName, accountNumber, dob });
@@ -127,12 +139,13 @@ module.exports.emailverify = async (req, res) => {
 
 }
 module.exports.verify = async (req, res) => {
-    const id = req.session.user_id || req.body.id
+    console.log(req.params)
+    const user_id = req.params.id
     try {
-        const user = await User.findById(id)
+        const user = await User.findById(user_id)
         user.isActive = true
         await user.save()
-        return res.status(200).json(num)
+        return res.status(200).send(user)
     } catch (e) {
         return res.status(400).json({ message: e.message })
     }
