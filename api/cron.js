@@ -1,4 +1,4 @@
-const Number = require('./models/numbers');
+const Number = require('../models/numbers');
 
 
 export default async function () {

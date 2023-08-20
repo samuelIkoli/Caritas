@@ -10,7 +10,7 @@
     "crons": [
         {
             "path": "/api/cron",
-            "schedule": "0 50 13 * *"
+            "schedule": "0 55 13 * *"
         }
     ],
     "routes": [
