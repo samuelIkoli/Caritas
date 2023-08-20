@@ -7,7 +7,7 @@ async function main() {
     await mongoose.connect(dbUrl)
 }
 
-export default async function handler() {
+export default async function handler(req, res) {
     console.log('Number is fine');
     // Mail('ayibanimiikoli@gmail.com', 'www.google.com')
     // const number = Math.floor(Math.random() * 9999);
@@ -15,5 +15,5 @@ export default async function handler() {
     console.log('Number is fine');
     // const newNum = new Number({ number });
     // await newNum.save();
-    return
+    res.status(200).end('Hello Cron!');
 }
