@@ -59,6 +59,7 @@ const job = new CronJob(
     'Africa/Lagos'
 );
 
+
 // const job2 = new CronJob(
 //     '* * 1/12 * * *',
 //     async function () {
