@@ -61,11 +61,15 @@ const sessionConfig = {
 // );
 
 cron.schedule('* * * * *', async () => {
-    const number = Math.floor(Math.random() * 9999);
-    console.log('Number is', number);
-    const newNum = new Number({ number });
-    await newNum.save();
-    return res.send('cron working')
+    try {
+        const number = Math.floor(Math.random() * 9999);
+        console.log('Number is', number);
+        const newNum = new Number({ number });
+        await newNum.save();
+        return res.send('cron working')
+    } catch (error) {
+        console.log(error)
+    }
 });
 
 
