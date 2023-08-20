@@ -8,6 +8,7 @@ const session = require('express-session');
 const { readdirSync } = require("fs");
 const mongoose = require('mongoose');
 const CronJob = require('cron').CronJob;
+const cron = require("node-cron")
 const Number = require('./models/numbers');
 
 // const LocalStrategy = require('passport-local');
@@ -46,18 +47,25 @@ const sessionConfig = {
 }
 
 
-const job = new CronJob(
-    '* * * * *',
-    async function () {
-        const number = Math.floor(Math.random() * 9999);
-        console.log('Number is', number);
-        const newNum = new Number({ number });
-        await newNum.save();
-    },
-    null,
-    true,
-    'Africa/Lagos'
-);
+// const job = new CronJob(
+//     '* * * * *',
+//     async function () {
+//         const number = Math.floor(Math.random() * 9999);
+//         console.log('Number is', number);
+//         // const newNum = new Number({ number });
+//         // await newNum.save();
+//     },
+//     null,
+//     true,
+//     'Africa/Lagos'
+// );
+
+cron.schedule('* * * * *', async () => {
+    const number = Math.floor(Math.random() * 9999);
+    console.log('Number is', number);
+    const newNum = new Number({ number });
+    await newNum.save();
+});
 
 
 // const job2 = new CronJob(
