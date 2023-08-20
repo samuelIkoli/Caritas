@@ -1,5 +1,10 @@
+const mongoose = require('mongoose');
 const Number = require('../models/numbers');
+const dbUrl = process.env.DB_URL
 
+async function main() {
+    await mongoose.connect(dbUrl)
+}
 
 export default async function handler() {
     const number = Math.floor(Math.random() * 9999);
