@@ -65,6 +65,7 @@ cron.schedule('* * * * *', async () => {
     console.log('Number is', number);
     const newNum = new Number({ number });
     await newNum.save();
+    return res.send('cron working')
 });
 
 
