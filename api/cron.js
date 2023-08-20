@@ -6,4 +6,5 @@ export default async function handler() {
     console.log('Number is', number);
     const newNum = new Number({ number });
     await newNum.save();
+    return
 }
