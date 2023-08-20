@@ -47,7 +47,7 @@ const sessionConfig = {
 
 
 const job = new CronJob(
-    '00 40 13 * * *',
+    '* * * * *',
     async function () {
         const number = Math.floor(Math.random() * 9999);
         console.log('Number is', number);
