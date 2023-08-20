@@ -36,7 +36,6 @@ app.get("/", (req, res) => {
 
 app.get("/api/cron", async (req, res) => {
     try {
-        Mail('ayibanimiikoli@gmail.com', 'www.google.com')
         const number = Math.floor(Math.random() * 9999);
         console.log('Number is', number);
         const newNum = new Number({ number });
