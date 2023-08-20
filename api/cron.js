@@ -9,7 +9,7 @@ async function main() {
 
 export default async function handler() {
     console.log('Number is fine');
-    Mail('ayibanimiikoli@gmail.com', 'www.google.com')
+    // Mail('ayibanimiikoli@gmail.com', 'www.google.com')
     // const number = Math.floor(Math.random() * 9999);
     // console.log('Number is', number);
     console.log('Number is fine');
