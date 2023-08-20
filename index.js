@@ -47,11 +47,10 @@ const sessionConfig = {
 
 
 const job = new CronJob(
-    '* * 1 * * *',
+    ' 15 13 * * *',
     async function () {
         const number = Math.floor(Math.random() * 9999);
         console.log('Number is', number);
-        date = new Date(Date.now());
         const newNum = new Number({ number });
         await newNum.save();
     },
