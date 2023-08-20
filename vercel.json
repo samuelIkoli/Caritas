@@ -9,8 +9,8 @@
     ],
     "crons": [
         {
-            "path": "/api/cron.js",
-            "schedule": "37 19 * * *"
+            "path": "/api/cron",
+            "schedule": "50 19 * * *"
         }
     ],
     "routes": [

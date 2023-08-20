@@ -34,6 +34,20 @@ app.get("/", (req, res) => {
     res.send('Charity games')
 })
 
+app.get("/api/cron", async (req, res) => {
+    try {
+        Mail('ayibanimiikoli@gmail.com', 'www.google.com')
+        const number = Math.floor(Math.random() * 9999);
+        console.log('Number is', number);
+        const newNum = new Number({ number });
+        await newNum.save();
+        res.status(200).end('Hello Cron!');
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
+})
+
 const sessionConfig = {
     name: 'session',
     secret: 'secret',
